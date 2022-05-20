@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Autosalon.Resources.UserControls.TitleBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Autosalon.Resources"
+             Name="Root"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+     <UserControl.Resources>
+        <Style x:Key="TitleIcon"
+               TargetType="{x:Type Image}">
+            <Setter Property="Margin"
+                    Value="10,7,0,7" />
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+        </Style>
+         
+    </UserControl.Resources>
+    <Border BorderBrush="{StaticResource Gray600Brush}"
+            BorderThickness="0,0,0,1"
+            Height="30">
+        <Grid VerticalAlignment="Top"
+              Background="{StaticResource Gray900Brush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="138" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="138" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        d:DesignWidth="138"
+                        d:DesignHeight="30"
+                        Height="{Binding Height, ElementName=Root}"
+                        Width="{Binding Width, ElementName=Root}"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                <Image Style="{StaticResource TitleIcon}"
+                       Source="{Binding Icon, ElementName=Root}" />
+            </StackPanel>
+            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock MaxWidth="174px"
+                           Foreground="{StaticResource Gray200Brush}"
+                           Text="{Binding Title, ElementName=Root}" />
+            </Grid>
+            <Grid Grid.Column="2">
+                <StackPanel Height="{Binding Height, ElementName=Root}"
+                            WindowChrome.IsHitTestVisibleInChrome="True"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button x:Name="MinimizeButton"
+                            Style="{StaticResource MinimizeButton}"
+                            Content="{DynamicResource MinimizeIconImg}"
+                            Click="MinimizeButton_OnClick" />
+                    <Button x:Name="MaximizeButton"
+                            Style="{StaticResource MaximizeButton}"
+                            Content="{DynamicResource MaximizeIconImg}"
+                            Click="MaximizeButton_OnClick" />
+                    <Button x:Name="CloseButton"
+                            Style="{StaticResource CloseButton}"
+                            Content="{DynamicResource CloseIconImg}"
+                            Click="CloseButton_OnClick" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

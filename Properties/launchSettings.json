@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Autosalon": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\УЧЕБА 4 СЕМ\\ООП\\OOP-Labs-4sem\\Autosalon"
+    }
+  }
+}

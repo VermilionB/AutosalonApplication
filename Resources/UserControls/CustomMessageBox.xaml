@@ -1,0 +1,104 @@
+﻿<Window x:Class="Autosalon.Resources.UserControls.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CustomMessageBox" Height="180" Width="500"
+        ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        WindowStyle="None" Background="Transparent">
+    <Grid materialDesign:ShadowAssist.ShadowDepth="Depth5" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="197*" />
+            <ColumnDefinition Width="295*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <materialDesign:Card x:Name="CardHeader" Grid.Row="0" Padding=" 0 0 0 0" Margin="0"
+                             materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                             Background="{DynamicResource PrimaryHueMidBrush}"
+                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Visibility="Visible"
+                             Grid.ColumnSpan="2">
+            
+                <TextBlock x:Name="TxtTitle" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Style="{DynamicResource MaterialDesignTitleTextBlock}" >
+                    Message Title
+                </TextBlock>
+            
+        </materialDesign:Card>
+        <StackPanel HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Grid.Column="1">
+            <Button x:Name="BtnClose" Click="btnClose_Click" Width="35"  Background="White"
+                    Style="{StaticResource MyBtn}"
+                    Foreground="{DynamicResource PrimaryHueDarkBrush}">
+                <materialDesign:PackIcon Kind="Close" />
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#444447">
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon x:Name="ConfirmationIcon" Kind="HelpCircleOutline" Width="40"
+                                                 Height="40" Foreground="DarkRed" Visibility="Collapsed" />
+                        <materialDesign:PackIcon x:Name="InfoIcon" Kind="InformationOutline" Width="40" Height="40"
+                                                 Foreground="Gold" Visibility="Collapsed" />
+                        <materialDesign:PackIcon x:Name="SuccessIcon" Kind="CheckCircleOutline" Width="40" Height="40"
+                                                 Foreground="Green" Visibility="Collapsed" />
+                        <materialDesign:PackIcon x:Name="ErrorIcon" Kind="CloseCircleOutline" Width="40" Height="40"
+                                                 Foreground="Red" Visibility="Collapsed" />
+                        <TextBox x:Name="TxtMessage" Width="400" Text="Test" VerticalAlignment="Center"
+                                 IsReadOnly="True" Grid.Row="0" Margin="5" FontSize="14"
+                                 Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
+                                 Background="Transparent"
+                                 Foreground="White"
+                                 TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- <materialDesign:TransitioningContent> -->
+                    <!--     <materialDesign:TransitioningContent.OpeningEffects > -->
+                    <!--         <materialDesign:TransitionEffect Kind="FadeIn" /> -->
+                    <!--         <materialDesign:TransitionEffect Kind="SlideInFromBottom" /> -->
+                    <!--     </materialDesign:TransitioningContent.OpeningEffects> -->
+                    <!-- </materialDesign:TransitioningContent> -->
+
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,20,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="BtnOk" Click="btnOk_Click" Grid.Column="1"
+                            Style="{StaticResource MyBtn}" Margin="5" Width="100" Content="OK"
+                            ToolTip="Ok" />
+                    <Button x:Name="BtnCancel" Click="btnCancel_Click" Grid.Column="2"
+                            Style="{StaticResource MyBtn}" Margin="5" Width="100" Content="Cancel"
+                            ToolTip="Cancel" />
+                    <Button x:Name="BtnYes" Click="btnYes_Click" Grid.Column="1"
+                            Style="{StaticResource MyBtn}" Margin="5" Width="100" Content="Yes"
+                            ToolTip="Yes" />
+                    <Button x:Name="BtnNo" Click="btnNo_Click" Grid.Column="2"
+                            Style="{StaticResource MyBtn}" Margin="5" Width="100" Content="No"
+                            ToolTip="No" />
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
