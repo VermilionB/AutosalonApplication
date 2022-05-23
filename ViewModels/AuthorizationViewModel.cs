@@ -38,7 +38,6 @@ public class AuthorizationViewModel : ViewModelBase
         _loginViewModel = loginViewModel;
         ToRegisterWindowCommand = new RelayCommand(OnToRegisterWindowExecute, CanToRegisterWindowExecuted);
         UserSignInCommand = new RelayCommand(OnUserSignIn, CanUserSignIn);
-       
     }
     
     #region Navigation
@@ -68,7 +67,7 @@ public class AuthorizationViewModel : ViewModelBase
                     CurrentUser.setInstanceCustomer(customer);
                     CustomerWindow customerWindow = new CustomerWindow();
                     if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
-                    customerWindow.DataContext = new CustomerViewModel(navigator);
+                    customerWindow.DataContext = new CustomerViewModel();
                     customerWindow.Show();
                 }
                 else

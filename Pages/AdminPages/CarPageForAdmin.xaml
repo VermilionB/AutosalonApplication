@@ -9,6 +9,51 @@
       mc:Ignorable="d"
       Title="Car Page For Admin" d:DesignHeight="570" d:DesignWidth="920"
       Background="#424148">
+    <Page.Resources>
+        <Style x:Key="MyBtnWithTrigger" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#E31E00" BorderThickness="1" Margin="1 1 2 0" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Border.Background>
+                                <SolidColorBrush x:Name="bgBrush" Color="#2E2E31" />
+                            </Border.Background>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="bgBrush"
+                                                            Storyboard.TargetProperty="Color" To="#E31E00"
+                                                            Duration="0:0:0.250" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="bgBrush"
+                                                            Storyboard.TargetProperty="Color" To="#2E2E31"
+                                                            Duration="0:0:0.250" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E31E00" />
+                </Trigger>
+                <DataTrigger Binding="{Binding Approved}" Value="Approved">
+                    <Setter Property="Visibility" Value="Hidden"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid Style="{StaticResource Body}" Background="#424148">
         <Grid Margin="15 20 15 20 ">
             <Grid.RowDefinitions>
@@ -51,7 +96,11 @@
                     <Label Content="Release date" Style="{StaticResource MyLabel}" HorizontalAlignment="Left" />
                     <Label HorizontalAlignment="Right" Content="{Binding ReleaseDate}" />
                 </Grid>
-
+                <Grid Margin="0 6 0 0 " Height="30px">
+                    <Button Content="Approve" Style="{StaticResource MyBtnWithTrigger}"
+                            Command="{Binding ApproveCommand}" Width="80" HorizontalAlignment="Left">
+                    </Button>
+                </Grid>
             </StackPanel>
         </Grid>
     </Grid>

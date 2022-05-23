@@ -15,20 +15,17 @@ public class CustomerViewModel : ViewModelBase
     private Page _toBuyCarsPage;
     private Page _homePage;
     private Page _myOrdersPage;
+    private Page _myProfilePage;
 
     public Page CurrentPage
     {
         get => _currentPage;
         set => Set(ref _currentPage, value);
     }
-
-    public ViewModelBase? CurrentViewModel => _navigator.CurrentViewModel;
-
-    public CustomerViewModel(Navigator navigator)
+    
+    public CustomerViewModel()
     {
-        _navigator = navigator;
-        _navigator.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
+        _myProfilePage = new MyProfilePage();
         _myOrdersPage = new MyOrdersPage();
         _homePage = new HomePage();
         _toSellCarsPage = new ToSellCarsPage();
@@ -39,11 +36,20 @@ public class CustomerViewModel : ViewModelBase
         ToSellCarsButtonCommand = new RelayCommand(OnToSellCarsExecute, CanToSellCarsExecuted);
         ToBuyCarsButtonCommand = new RelayCommand(OnToBuyCarsExecute, CanToBuyCarsExecuted);
         MyOrdersCommand = new RelayCommand(OnMyOrdersExecute, CanMyOrdersExecuted);
+        MyProfilePageCommand = new RelayCommand(OnMyProfileExecute, CanMyProfileExecuted);
     }
 
     public ICommand MyOrdersCommand { get; }
     public ICommand ToSellCarsButtonCommand { get; }
     public ICommand ToBuyCarsButtonCommand { get; }
+    public ICommand MyProfilePageCommand { get; }
+
+    private bool CanMyProfileExecuted(object o) => true;
+    private void OnMyProfileExecute(object o)
+    {
+        _myProfilePage.DataContext = new MyProfileViewModel(this);
+        CurrentPage = _myProfilePage;
+    }
 
     private bool CanMyOrdersExecuted(object o) => true;
     
@@ -81,9 +87,5 @@ public class CustomerViewModel : ViewModelBase
     }
 
     #endregion
-
-    private void OnCurrentViewModelChanged()
-    {
-        OnPropertyChanged(nameof(CurrentViewModel));
-    }
+    
 }

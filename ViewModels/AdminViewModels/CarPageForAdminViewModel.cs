@@ -1,5 +1,9 @@
-﻿using Autosalon.Base;
+﻿using System.Windows.Input;
+using Autosalon.Base;
+using Autosalon.Commands;
 using Autosalon.Models;
+using Autosalon.Pages;
+using Autosalon.Resources.UserControls;
 
 namespace Autosalon.ViewModels.AdminViewModels;
 
@@ -8,6 +12,20 @@ public class CarPageForAdminViewModel : ViewModelBase
     public CarPageForAdminViewModel(AllCarsViewModel allCarsViewModel)
     {
         SelectedAutomobile = allCarsViewModel.SelectedCar;
+        ApproveCommand = new RelayCommand(OnApproveCommandExecute, CanApproveCommandExecuted);
+    }
+    
+    public ICommand ApproveCommand { get; }
+    private bool CanApproveCommandExecuted(object o) => true;
+    private void OnApproveCommandExecute(object o)
+    {
+        SelectedAutomobile.Approved = "Approved";
+        using (var db = new AutosalonContext())
+        {
+            db.Automobiles.Update(SelectedAutomobile);
+            db.SaveChanges();
+        }
+        var message = new CustomMessageBox("Car approved successfully", MessageType.Info , MessageButtons.Ok).ShowDialog();
     }
     
     private Automobile _selectedAutomobile;
@@ -58,6 +76,10 @@ public class CarPageForAdminViewModel : ViewModelBase
         get => SelectedAutomobile.Color;
     }
 
+    public string Approved
+    {
+        get => SelectedAutomobile.Approved;
+    }
     public Automobile SelectedAutomobile
     {
         get => _selectedAutomobile;
