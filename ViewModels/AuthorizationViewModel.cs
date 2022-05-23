@@ -7,7 +7,9 @@ using Autosalon.Commands;
 using Autosalon.Infrastructure;
 using Autosalon.Models;
 using Autosalon.Pages;
+using Autosalon.Pages.AdminPages;
 using Autosalon.Resources.UserControls;
+using Autosalon.ViewModels.AdminViewModels;
 
 namespace Autosalon.ViewModels;
 
@@ -77,7 +79,7 @@ public class AuthorizationViewModel : ViewModelBase
                         CurrentUser.setInstanceManager(manager);
                         AdminWindow adminWindow = new AdminWindow();
                         if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
-                        adminWindow.DataContext = new CustomerViewModel(navigator);
+                        adminWindow.DataContext = new AdminViewModel();
                         adminWindow.Show();   
                         return;
                     }

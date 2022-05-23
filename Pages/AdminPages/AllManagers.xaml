@@ -1,0 +1,26 @@
+﻿<Page x:Class="Autosalon.Pages.AdminPages.AllManagers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Autosalon.Pages.AdminPages"
+      xmlns:adminViewModels="clr-namespace:Autosalon.ViewModels.AdminViewModels"
+      d:DataContext="{d:DesignInstance Type=adminViewModels:AllManagersViewModel}"
+
+      mc:Ignorable="d"
+      Title="AllManagers" d:DesignHeight="450" d:DesignWidth="900">
+    <Grid Background="#424148">
+        <DataGrid Grid.Row="0" x:Name="FlatsDataGrid" Style="{StaticResource MaterialDesignDataGrid}"
+                  ItemsSource="{Binding ManagersList}" AutoGenerateColumns="False"
+                  IsReadOnly="True" ColumnWidth="*" Background="Transparent" CanUserResizeColumns="False"
+                  CanUserReorderColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Amount of saled cars" Binding="{Binding AmountOfSaledCars}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

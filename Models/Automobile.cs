@@ -11,7 +11,7 @@ namespace Autosalon.Models
         }
 
         public Automobile(Guid id, string brand, string model, string color, double price, int mileage, string image, int power,
-            string fuel, DateTime releaseDate)
+            string fuel, DateTime releaseDate, string approved)
         {
             Id = id;
             Brand = brand;
@@ -23,6 +23,7 @@ namespace Autosalon.Models
             Power = power;
             Fuel = fuel;
             ReleaseDate = releaseDate;
+            Approved = approved;
         }
 
         public Guid Id { get; set; }
@@ -35,6 +36,7 @@ namespace Autosalon.Models
         public int Power { get; set; }
         public string Fuel { get; set; } = null!;
         public DateTime ReleaseDate { get; set; }
+        public string? Approved { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }

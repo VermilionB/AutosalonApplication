@@ -4,8 +4,9 @@ using System.Windows;
 using System.Windows.Interop;
 using Autosalon.Infrastructure;
 using Autosalon.ViewModels;
+using Autosalon.ViewModels.AdminViewModels;
 
-namespace Autosalon.Pages;
+namespace Autosalon.Pages.AdminPages;
 
 public partial class AdminWindow : Window
 {

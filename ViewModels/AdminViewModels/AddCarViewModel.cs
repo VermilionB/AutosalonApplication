@@ -6,13 +6,13 @@ using Autosalon.Infrastructure;
 using Autosalon.Models;
 using Microsoft.Win32;
 
-namespace Autosalon.ViewModels;
+namespace Autosalon.ViewModels.AdminViewModels;
 
-public class ToSellCarsViewModel : ViewModelBase
+public class AddCarViewModel : ViewModelBase
 {
     private readonly OpenFileDialog _openFileDialog = new OpenFileDialog();
 
-    public ToSellCarsViewModel()
+    public AddCarViewModel()
     {
         AddCarCommand = new RelayCommand(OnAddCarExecute, CanAddCarExecuted);
         AddImageCommand = new RelayCommand(OnAddImageExecute, CanAddImageExecuted);
@@ -90,7 +90,7 @@ public class ToSellCarsViewModel : ViewModelBase
     {
         Automobile newCar = new Automobile(Guid.NewGuid(), Brand, Model, Color, int.Parse(Price), (int) Mileage,
             _openFileDialog.FileName,
-            int.Parse(Power), Fuel, ReleaseDate, "Not Approved");
+            int.Parse(Power), Fuel, ReleaseDate, "Approved");
 
         using (var db = AutosalonContext.GetContext())
         {

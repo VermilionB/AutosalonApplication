@@ -1,16 +1,17 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using Autosalon.Base;
-using Autosalon.Commands;
+﻿using Autosalon.Base;
 using Autosalon.Models;
 
-namespace Autosalon.ViewModels;
+namespace Autosalon.ViewModels.AdminViewModels;
 
-public class CarPageViewModel : ViewModelBase
+public class CarPageForAdminViewModel : ViewModelBase
 {
+    public CarPageForAdminViewModel(AllCarsViewModel allCarsViewModel)
+    {
+        SelectedAutomobile = allCarsViewModel.SelectedCar;
+    }
+    
     private Automobile _selectedAutomobile;
-    private Window _orderForm;
+
 
     public string Power
     {
@@ -57,29 +58,10 @@ public class CarPageViewModel : ViewModelBase
         get => SelectedAutomobile.Color;
     }
 
-
     public Automobile SelectedAutomobile
     {
         get => _selectedAutomobile;
         set => Set(ref _selectedAutomobile, value);
     }
-
-    public CarPageViewModel(ToBuyCarsViewModel toBuyCarsViewModel)
-    {
-        _orderForm = new OrderForm();
-
-        SelectedAutomobile = toBuyCarsViewModel.SelectedCar;
-        AddToCartCommand = new RelayCommand(OnAddToCartExecute, CanAddToCartExecuted);
-    }
-
-    public ICommand AddToCartCommand { get; }
-
-    private bool CanAddToCartExecuted(object o) => true;
-
-    private void OnAddToCartExecute(object o)
-    {
-        _orderForm.DataContext = new OrderFormViewModel(this);
-        _orderForm.ShowDialog();
-        
-    }
+    
 }

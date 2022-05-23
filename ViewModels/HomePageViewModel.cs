@@ -6,7 +6,7 @@ namespace Autosalon.ViewModels;
 
 public class HomePageViewModel : ViewModelBase
 {
-    public HomePageViewModel(Navigator navigator)
+    public HomePageViewModel()
     {
     }
 }

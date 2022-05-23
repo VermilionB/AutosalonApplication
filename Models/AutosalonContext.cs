@@ -52,6 +52,7 @@ namespace Autosalon.Models
                 entity.Property(e => e.ReleaseDate)
                     .HasColumnType("date")
                     .HasColumnName("Release_date");
+                entity.Property(e => e.Approved).HasMaxLength(20);
             });
 
             modelBuilder.Entity<Customer>(entity =>
