@@ -38,10 +38,10 @@ public class CustomerViewModel : ViewModelBase
         ToHomePageCommand = new RelayCommand(OnHomePageExecute, CanHomePageCanExecuted);
         ToSellCarsButtonCommand = new RelayCommand(OnToSellCarsExecute, CanToSellCarsExecuted);
         ToBuyCarsButtonCommand = new RelayCommand(OnToBuyCarsExecute, CanToBuyCarsExecuted);
-        MyOrdersCommnd = new RelayCommand(OnMyOrdersExecute, CanMyOrdersExecuted);
+        MyOrdersCommand = new RelayCommand(OnMyOrdersExecute, CanMyOrdersExecuted);
     }
 
-    public ICommand MyOrdersCommnd { get; }
+    public ICommand MyOrdersCommand { get; }
     public ICommand ToSellCarsButtonCommand { get; }
     public ICommand ToBuyCarsButtonCommand { get; }
 

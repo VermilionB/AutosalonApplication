@@ -7,6 +7,7 @@ using Autosalon.Base;
 using Autosalon.Commands;
 using Autosalon.Models;
 using Autosalon.Pages;
+using Autosalon.Pages.AdminPages;
 using Autosalon.ViewModels.AdminViewModels;
 using static System.String;
 
@@ -58,7 +59,7 @@ public class AllCarsViewModel : ViewModelBase
     public AllCarsViewModel(AdminViewModel adminViewModel)
     {
         _adminViewModel = adminViewModel;
-        CarPage = new CarPage();
+        CarPage = new CarPageForAdmin();
         SortByBrandCommand = new RelayCommand(OnSortByBrandExecute, CanSortByBrandExecuted);
         SortByPriceCommand = new RelayCommand(OnSortByPriceExecute, CanSortByPriceExecuted);
         

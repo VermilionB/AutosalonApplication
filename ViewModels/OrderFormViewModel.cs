@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Autosalon.Base;
 using Autosalon.Commands;
@@ -25,6 +26,7 @@ public class OrderFormViewModel : ViewModelBase
         ManagerList = new ObservableCollection<Manager>(AutosalonContext.GetContext().Managers.ToList());
         
         ConfirmOrderCommand = new RelayCommand(OnConfirmOrderExecute, CanConfirmOrderExecuted);
+        CancelOrderCommand = new RelayCommand(OnCancelOrderExecute, CanCancelOrderExecuted);
     }
     
     public Automobile SelectedAutomobile
@@ -52,7 +54,6 @@ public class OrderFormViewModel : ViewModelBase
     #region ConfirmPrder
     public ICommand ConfirmOrderCommand { get; }
     private bool CanConfirmOrderExecuted(object o) => true;
-    
     private void OnConfirmOrderExecute(object o)
     {
         try
@@ -75,12 +76,29 @@ public class OrderFormViewModel : ViewModelBase
                 context.SaveChanges();
             }
             
+            foreach (Window item in Application.Current.Windows)
+            {
+                if (item.DataContext == this) item.Close();
+            }            
         }
         catch (Exception e)
         {
-            var exception = new CustomMessageBox(e.Message, MessageType.Error, MessageButtons.Ok);
+            var exception = new CustomMessageBox(e.Message, MessageType.Error, MessageButtons.Ok).ShowDialog();
         }
         
+    }
+    
+    #endregion
+    
+    #region CancelOrder
+    public ICommand CancelOrderCommand { get; }
+    private bool CanCancelOrderExecuted(object o) => true;
+    private void OnCancelOrderExecute(object o)
+    {
+        foreach (Window item in Application.Current.Windows)
+        {
+            if (item.DataContext == this) item.Close();
+        }
     }
     
     #endregion

@@ -8,6 +8,7 @@ namespace Autosalon.Models
         public Customer()
         {
             Orders = new HashSet<Order>();
+            Requests = new HashSet<Request>();
         }
 
         public Guid Id { get; set; }
@@ -17,5 +18,6 @@ namespace Autosalon.Models
 
         public virtual UserAuth Auth { get; set; } = null!;
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

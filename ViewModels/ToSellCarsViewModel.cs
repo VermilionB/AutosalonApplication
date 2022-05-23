@@ -91,9 +91,11 @@ public class ToSellCarsViewModel : ViewModelBase
         Automobile newCar = new Automobile(Guid.NewGuid(), Brand, Model, Color, int.Parse(Price), (int) Mileage,
             _openFileDialog.FileName,
             int.Parse(Power), Fuel, ReleaseDate, "Not Approved");
+        Request request = new Request(Guid.NewGuid(), newCar.Id, CurrentUser.getInstanceCustomer().Id);
 
         using (var db = AutosalonContext.GetContext())
         {
+            db.Requests.Add(request);
             db.Automobiles.Add(newCar);
             db.SaveChanges();
         }

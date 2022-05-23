@@ -55,7 +55,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid>
+    <Grid Background="#424148">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*" MinHeight="300"></RowDefinition>
             <RowDefinition Height="*" MinHeight="100"></RowDefinition>

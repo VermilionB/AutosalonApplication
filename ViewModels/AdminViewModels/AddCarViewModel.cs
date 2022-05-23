@@ -92,6 +92,7 @@ public class AddCarViewModel : ViewModelBase
             _openFileDialog.FileName,
             int.Parse(Power), Fuel, ReleaseDate, "Approved");
 
+
         using (var db = AutosalonContext.GetContext())
         {
             db.Automobiles.Add(newCar);

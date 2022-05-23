@@ -15,7 +15,7 @@ namespace Autosalon.Models
             : base(options)
         {
         }
-        
+
         public static AutosalonContext GetContext()
         {
             return new AutosalonContext();
@@ -25,12 +25,14 @@ namespace Autosalon.Models
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<Manager> Managers { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<Request> Requests { get; set; } = null!;
         public virtual DbSet<UserAuth> UserAuths { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=LAPTOP-L6440R26;Initial Catalog=Autosalon;Trusted_Connection = True;TrustServerCertificate=True;");
             }
         }
@@ -40,6 +42,8 @@ namespace Autosalon.Models
             modelBuilder.Entity<Automobile>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Approved).HasMaxLength(20);
 
                 entity.Property(e => e.Brand).HasMaxLength(30);
 
@@ -52,7 +56,6 @@ namespace Autosalon.Models
                 entity.Property(e => e.ReleaseDate)
                     .HasColumnType("date")
                     .HasColumnName("Release_date");
-                entity.Property(e => e.Approved).HasMaxLength(20);
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -124,6 +127,27 @@ namespace Autosalon.Models
                     .HasForeignKey(d => d.ManagerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Orders_Managers_Id_fk");
+            });
+
+            modelBuilder.Entity<Request>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.AutomobileId).HasColumnName("Automobile_id");
+
+                entity.Property(e => e.UserId).HasColumnName("User_id");
+
+                entity.HasOne(d => d.Automobile)
+                    .WithMany(p => p.Requests)
+                    .HasForeignKey(d => d.AutomobileId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Requests_Automobiles_Id_fk");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Requests)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Requests_Customers_Id_fk");
             });
 
             modelBuilder.Entity<UserAuth>(entity =>

@@ -13,14 +13,9 @@ namespace Autosalon.Pages;
 
 public partial class CustomerWindow : Window
 {
-    CustomerViewModel? model;
-
     public CustomerWindow()
     {
         InitializeComponent();
-        Navigator navigator = new Navigator();
-        navigator.CurrentViewModel = new LoginViewModel();
-        DataContext = new CustomerViewModel(navigator);
 
         SourceInitialized += (s, e) =>
         {
@@ -224,9 +219,5 @@ public partial class CustomerWindow : Window
     {
         Close();
     }
-
-    public void ToHomePage_Click(object sender, RoutedEventArgs e)
-    {
-        if (model != null) ;
-    }
+    
 }

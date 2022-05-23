@@ -8,8 +8,9 @@ namespace Autosalon.Models
         public Automobile()
         {
             Orders = new HashSet<Order>();
+            Requests = new HashSet<Request>();
         }
-
+        
         public Automobile(Guid id, string brand, string model, string color, double price, int mileage, string image, int power,
             string fuel, DateTime releaseDate, string approved)
         {
@@ -36,8 +37,9 @@ namespace Autosalon.Models
         public int Power { get; set; }
         public string Fuel { get; set; } = null!;
         public DateTime ReleaseDate { get; set; }
-        public string? Approved { get; set; }
+        public string Approved { get; set; } = null!;
 
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }
