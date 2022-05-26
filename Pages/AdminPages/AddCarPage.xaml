@@ -5,7 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Autosalon.Pages.AdminPages"
       xmlns:hlyWPF="http://schemas.hpod9.com/haley/wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:infrastructure="clr-namespace:Autosalon.Infrastructure"
+      xmlns:adminViewModels="clr-namespace:Autosalon.ViewModels.AdminViewModels"
+      d:DataContext="{d:DesignInstance adminViewModels:AddCarViewModel}"
       mc:Ignorable="d"
+      x:Name="AddCar"
       Title="AddCarPage"  d:DesignHeight="450" d:DesignWidth="900">
     <Grid Style="{StaticResource Body}" Background="#424148">
         <Grid  Margin="15 5 15 5 ">
@@ -17,6 +22,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*" MaxHeight="200px" MinHeight="180px" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.5*" />
             </Grid.RowDefinitions>
@@ -31,11 +37,19 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Style="{StaticResource MyLabel}" HorizontalAlignment="Left" Content="Brand" />
-                <ComboBox Grid.Row="1" Text="{Binding Brand}" Height="30">
-                    <TextBlock Text="BMW" />
-                    <TextBlock Text="Mercedes" />
-                    <TextBlock Text="Audi" />
-                    <TextBlock Text="Volkswagen" />
+                <ComboBox x:Name="BrandComboBox" Grid.Row="1" Height="30" Foreground="White">
+                    <ComboBoxItem Content="BMW" />
+                    <ComboBoxItem Content="Mercedes" />
+                    <ComboBoxItem Content="Audi" />
+                    <ComboBoxItem Content="Volkswagen" />
+                    
+                    <ComboBox.Text>
+                        <Binding Path="Brand" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <infrastructure:EmptyStringValidationRule ErrorMessage="Select brand"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
                 </ComboBox>
 
 
@@ -46,8 +60,14 @@
                             SelectedDateFormat="Short" VerticalAlignment="Center" Foreground="White" Height="30" />
 
                 <Label Grid.Row="4" Style="{StaticResource MyLabel}" HorizontalAlignment="Left" Content="Price" />
-                <TextBox Grid.Row="5" Name="Price" Height="30" Text="{Binding Price}"
-                         PreviewTextInput="Price_OnPreviewTextInput" />
+                <TextBox Grid.Row="5" Name="Price" Height="30" 
+                         PreviewTextInput="Price_OnPreviewTextInput" Foreground="White">
+                    <Binding Path="Price" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules >
+                            <infrastructure:PositiveIntValidationRule ErrorMessage="Enter price"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 0" VerticalAlignment="Stretch"
@@ -68,18 +88,35 @@
 
                 <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource MyLabel}" HorizontalAlignment="Left"
                        Content="Model" />
-                <ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Model}" Height="30"
+                <ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Height="30"
                           Foreground="White">
                     <!-- Style="{StaticResource MyComboBox}" -->
-                    <TextBlock Text="M" />
-                    <TextBlock Text="AMG" />
-                    <TextBlock Text="Quattro" />
-                    <TextBlock Text="R" />
+                    <ComboBoxItem Content="M" />
+                    <ComboBoxItem Content="AMG" />
+                    <ComboBoxItem Content="Quattro" />
+                    <ComboBoxItem Content="R" />
+                    
+                    <ComboBox.Text>
+                        <Binding Path="Model" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <infrastructure:EmptyStringValidationRule ErrorMessage="Select model"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
                 </ComboBox>
                 <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource MyLabel}" HorizontalAlignment="Left"
                        Content="Horse power" />
-                <TextBox Grid.Column="0" Grid.Row="3" Text="{Binding Power}" Height="30" Grid.ColumnSpan="2"
-                         PreviewTextInput="Price_OnPreviewTextInput" />
+                <TextBox Grid.Column="0" Grid.Row="3" Height="30" Grid.ColumnSpan="2"
+                         PreviewTextInput="Price_OnPreviewTextInput" Foreground="White">
+                    <Binding Path="Power" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules >
+                            <infrastructure:PositiveIntValidationRule ErrorMessage="Enter power"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Button Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="2" Name="AddImageButton"
+                        Style="{StaticResource MyBtn}" Height="20"
+                        Command="{Binding AddImageCommand}" Content="Select picture" Margin="0 5" />
 
             </Grid>
 
@@ -100,12 +137,19 @@
 
                 <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource MyLabel}" HorizontalAlignment="Left"
                        Content="Fuel type" />
-                <ComboBox Grid.Column="0" Grid.Row="1" Text="{Binding Fuel}" Height="30"
-
+                <ComboBox Grid.Column="0" Grid.Row="1" Height="30" Foreground="White"
                           Margin="0 0 5 0" Grid.ColumnSpan="2">
-                    <TextBlock Text="Diesel" />
-                    <TextBlock Text="Gasoline" />
-                    <TextBlock Text="Electric" />
+                    <ComboBoxItem Content="Diesel" />
+                    <ComboBoxItem Content="Gasoline" />
+                    <ComboBoxItem Content="Electric" />
+                    
+                    <ComboBox.Text>
+                        <Binding Path="Fuel" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <infrastructure:EmptyStringValidationRule ErrorMessage="Select fuel type"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
                 </ComboBox>
                 <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource MyLabel}" HorizontalAlignment="Left"
                        Content="Color" />
@@ -128,13 +172,41 @@
                         TickFrequency="1000" />
 
             </Grid>
-            <Image Grid.Column="1" Grid.Row="1" Name="TestImage" Source="{Binding ImagePath}"></Image>
-            <Button Grid.Column="1" Grid.Row="2" Name="AddImageButton"
-                    Height="40" Width="200" Style="{StaticResource MyBtn}"
-                    Command="{Binding AddImageCommand}" Content="Select picture" Margin="0, 5" />
-            <Button Grid.Column="0" Grid.Row="2" Height="40" Width="200" Command="{Binding AddCarCommand}"
-                    Style="{StaticResource MyBtn}"
-                    Content="Add New Car" VerticalAlignment="Center" />
+            <Image Grid.Column="1" Grid.Row="1" Name="TestImage"  VerticalAlignment="Center" Source="{Binding ImagePath}" Margin="0 5 0 0"></Image>
+            <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" x:Name="ReviewTextBox" Foreground="White"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource MaterialDesignFilledTextBox}" TextWrapping="Wrap"
+                     MaxLength="2000"
+                     FontSize="12"
+                     materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     materialDesign:HintAssist.Hint="Write description of car here" Margin="0 20 0 0"
+                     BorderBrush="White"
+                     CaretBrush="White" Text="{Binding Description, Mode=TwoWay}" />
+            <Button Grid.Column="2" Grid.Row="3" Height="40" Width="200" Command="{Binding AddCarCommand}"
+                    Content="Add New Car" VerticalAlignment="Center" CommandParameter="{Binding ElementName=AddCar}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MyBtn}">
+                        <Style.Triggers>
+                            
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=BrandComboBox, Path=Text.Length}" Value="0" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="False" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </MultiDataTrigger>
+                            
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PriceTextBox}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </Grid>
     </Grid>
 </Page>

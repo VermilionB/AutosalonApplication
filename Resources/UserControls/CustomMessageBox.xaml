@@ -9,7 +9,12 @@
         ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        WindowStyle="None" Background="Transparent">
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30" />
+    </WindowChrome.WindowChrome>
     <Grid materialDesign:ShadowAssist.ShadowDepth="Depth5" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*" />
@@ -38,7 +43,7 @@
                 <materialDesign:PackIcon Kind="Close" />
             </Button>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#444447">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4241">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />

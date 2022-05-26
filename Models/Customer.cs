@@ -7,6 +7,7 @@ namespace Autosalon.Models
     {
         public Customer()
         {
+            Comments = new HashSet<Comment>();
             Orders = new HashSet<Order>();
             Requests = new HashSet<Request>();
         }
@@ -18,6 +19,8 @@ namespace Autosalon.Models
 
         public virtual UserAuth Auth { get; set; } = null!;
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Request> Requests { get; set; }
+        public virtual ICollection<Request> Requests { get; set; } 
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }

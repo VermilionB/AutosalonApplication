@@ -27,7 +27,7 @@ public class AddCarViewModel : ViewModelBase
     private string _power;
     private string _fuel;
     private string _color;
-
+    private string _description;
 
     public string Power
     {
@@ -82,6 +82,11 @@ public class AddCarViewModel : ViewModelBase
         get => _color;
         set => Set(ref _color, value);
     }
+    public string Description
+    {
+        get => _description;
+        set => Set(ref _description, value);
+    }
 
     public ICommand AddCarCommand { get; }
     private bool CanAddCarExecuted(object o) => true;
@@ -90,7 +95,7 @@ public class AddCarViewModel : ViewModelBase
     {
         Automobile newCar = new Automobile(Guid.NewGuid(), Brand, Model, Color, int.Parse(Price), (int) Mileage,
             _openFileDialog.FileName,
-            int.Parse(Power), Fuel, ReleaseDate, "Approved");
+            int.Parse(Power), Fuel, ReleaseDate, "Approved", Description);
 
 
         using (var db = AutosalonContext.GetContext())

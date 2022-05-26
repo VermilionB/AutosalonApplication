@@ -59,7 +59,8 @@
                     Command="{Binding MyOrdersCommand}">My Orders</Button>
             <Button Grid.Row="0" Grid.Column="4" Style="{StaticResource MyBtn}"
                     Command="{Binding MyProfilePageCommand}">My Profile</Button>
-            <Button Grid.Row="0" Grid.Column="5" Style="{StaticResource MyBtn}">About</Button>
+            <Button Grid.Row="0" Grid.Column="5" Style="{StaticResource MyBtn}"
+                    Command="{Binding AboutCommand}">About</Button>
         </Grid>
 
         <Frame Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch"

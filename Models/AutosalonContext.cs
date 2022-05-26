@@ -27,12 +27,12 @@ namespace Autosalon.Models
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<Request> Requests { get; set; } = null!;
         public virtual DbSet<UserAuth> UserAuths { get; set; } = null!;
+        public virtual DbSet<Comment> Comments { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=LAPTOP-L6440R26;Initial Catalog=Autosalon;Trusted_Connection = True;TrustServerCertificate=True;");
             }
         }
@@ -56,6 +56,22 @@ namespace Autosalon.Models
                 entity.Property(e => e.ReleaseDate)
                     .HasColumnType("date")
                     .HasColumnName("Release_date");
+                entity.Property(e => e.Description).HasMaxLength(2000);
+            });
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
+
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Customer)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.CustomerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Comments_Customers_Id_fk");
             });
 
             modelBuilder.Entity<Customer>(entity =>

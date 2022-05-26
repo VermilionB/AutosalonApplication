@@ -23,7 +23,7 @@
                          materialDesign:HintAssist.Hint="Email" Foreground="White" FontSize="16" />
             </DockPanel>
             <DockPanel LastChildFill="True" Margin="0 0 10 0" materialDesign:HintAssist.Hint="Password">
-                <local:PasswordUserControl Password="{Binding Password}"></local:PasswordUserControl>
+                <local:PasswordUserControl Password="{Binding Password}"></local:PasswordUserControl >
             </DockPanel>
             <Grid Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>

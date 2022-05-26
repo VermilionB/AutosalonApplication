@@ -47,7 +47,11 @@ public class ToBuyCarsViewModel : ViewModelBase
     public string? SearchBox
     {
         get => _searchBox;
-        set => Set(ref _searchBox, value);
+        set
+        {
+            Set(ref _searchBox, value);
+            CarList = SearchCommand();
+        }
     }
     
     public Page CarPage
@@ -59,11 +63,10 @@ public class ToBuyCarsViewModel : ViewModelBase
     {
         _customerViewModel = customerViewModel;
         CarPage = new CarPage();
+        
         SortByBrandCommand = new RelayCommand(OnSortByBrandExecute, CanSortByBrandExecuted);
         SortByPriceCommand = new RelayCommand(OnSortByPriceExecute, CanSortByPriceExecuted);
-        
         SortByPriceDescCommand = new RelayCommand(OnSortByPriceDescExecute, CanSortByPriceDescExecuted);
-        SearchInputCommand = new RelayCommand(OnSearchInputExecute, CanSearchInputExecuted);
     }
 
     public ObservableCollection<Automobile>? CarList
@@ -121,12 +124,14 @@ public class ToBuyCarsViewModel : ViewModelBase
     
 
     #region SearchInputCommand
-    public ICommand SearchInputCommand { get; }
-    private bool CanSearchInputExecuted(object o) => true;
-    private void OnSearchInputExecute(object o)
+    private ObservableCollection<Automobile> SearchCommand()
     {
+        if(SearchBox.Length == 0)
+        {
+            return new ObservableCollection<Automobile>(AutosalonContext.GetContext().Automobiles.Where(t => t.Approved == "Approved"));
+        }
         Regex regex = new Regex(SearchBox?.ToLower() ?? string.Empty);
-        var searchList = new ObservableCollection<Automobile>(CarList.Where(t => regex.Match(t.Brand?.ToLower() ?? string.Empty).Success));
+        return new ObservableCollection<Automobile>(CarList.Where(t => regex.Match(t.Brand?.ToLower() ?? string.Empty).Success));
     }
     #endregion
      

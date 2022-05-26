@@ -64,8 +64,15 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <Image Grid.Column="0" Grid.Row="0" Source="{Binding Image}" Stretch="Uniform" />
+            <Border MinWidth="500" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    CornerRadius="2"
+                    Background="#454247">
+                <Image Grid.Column="0" Grid.Row="0" Source="{Binding Image}" Stretch="Uniform" />
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Color="#7A7A76" ShadowDepth="5" />
+                </Border.Effect>
+            </Border>
+            
             <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
                 <Grid Height="30px">
                     <Label Content="Brand" Style="{StaticResource MyLabel}" HorizontalAlignment="Left" />
@@ -102,6 +109,19 @@
                     </Button>
                 </Grid>
             </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource MyLabel}" Content="Description" HorizontalAlignment="Left"/>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="Red" BorderThickness="0.5">
+                    <TextBlock Margin="5"
+                        Style="{StaticResource MaterialDesignTextBlock}" Text="{Binding Description}" Foreground="White">
+                    </TextBlock>
+                </Border>
+            </Grid>
+            
         </Grid>
     </Grid>
 </Page>

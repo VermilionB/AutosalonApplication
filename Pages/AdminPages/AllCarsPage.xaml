@@ -84,12 +84,16 @@
 
                     <TextBox Style="{StaticResource MaterialDesignTextBox}" Name="SearchBox"
                              Background="Transparent"
-                             Height="30" Width="270px"
+                             Text="{Binding SearchBox, Mode=TwoWay}"
+                             Foreground="White"
+                             Height="30" Width="300"
                              HorizontalAlignment="Left" />
                 </StackPanel>
 
 
                 <ListBox Grid.Row="1" ItemsSource="{Binding CarList}"
+                         BorderBrush="Red"
+                         BorderThickness="0.5"
                          Style="{StaticResource MyListBox}"
                          ItemTemplate="{StaticResource ListTemplate}"
                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"

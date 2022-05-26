@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:hw="http://schemas.hpod9.com/haley/wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
       Title="To Sell" d:DesignHeight="450" d:DesignWidth="900">
     
@@ -17,6 +18,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*" MaxHeight="200px" MinHeight="180px" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.5*" />
             </Grid.RowDefinitions>
@@ -47,7 +49,7 @@
 
                 <Label Grid.Row="4" Style="{StaticResource MyLabel}" HorizontalAlignment="Left" Content="Price" />
                 <TextBox Grid.Row="5" Name="Price" Height="30" Text="{Binding Price}"
-                         PreviewTextInput="Price_OnPreviewTextInput" />
+                         PreviewTextInput="Price_OnPreviewTextInput" Foreground="White"/>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 0" VerticalAlignment="Stretch"
@@ -79,7 +81,10 @@
                 <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource MyLabel}" HorizontalAlignment="Left"
                        Content="Horse power" />
                 <TextBox Grid.Column="0" Grid.Row="3" Text="{Binding Power}" Height="30" Grid.ColumnSpan="2"
-                         PreviewTextInput="Price_OnPreviewTextInput" />
+                         PreviewTextInput="Price_OnPreviewTextInput" Foreground="White"/>
+                <Button Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="2" Name="AddImageButton"
+                        Style="{StaticResource MyBtn}" Height="20"
+                        Command="{Binding AddImageCommand}" Content="Select picture" Margin="0 5" />
 
             </Grid>
 
@@ -128,11 +133,17 @@
                         TickFrequency="1000" />
 
             </Grid>
-            <Image Grid.Column="1" Grid.Row="1" Name="TestImage" Source="{Binding ImagePath}"></Image>
-            <Button Grid.Column="1" Grid.Row="2" Name="AddImageButton"
-                    Height="40" Width="200" Style="{StaticResource MyBtn}"
-                    Command="{Binding AddImageCommand}" Content="Select picture" Margin="0, 5" />
-            <Button Grid.Column="0" Grid.Row="2" Height="40" Width="200" Command="{Binding AddCarCommand}"
+            <Image Grid.Column="1" Grid.Row="1" Name="TestImage"  VerticalAlignment="Center" Source="{Binding ImagePath}" Margin="0 5 0 0"></Image>
+            <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" x:Name="ReviewTextBox" Foreground="White"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource MaterialDesignFilledTextBox}" TextWrapping="Wrap"
+                     MaxLength="2000"
+                     FontSize="12"
+                     materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     materialDesign:HintAssist.Hint="Write description of car here" Margin="0 20 0 0"
+                     BorderBrush="White"
+                     CaretBrush="White" Text="{Binding Description, Mode=TwoWay}" />
+            <Button Grid.Column="2" Grid.Row="3" Height="40" Width="200" Command="{Binding AddCarCommand}"
                     Style="{StaticResource MyBtn}"
                     Content="Add New Car" VerticalAlignment="Center" />
         </Grid>

@@ -4,11 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewModels="clr-namespace:Autosalon.ViewModels"
+      d:DataContext="{d:DesignInstance viewModels:ToBuyCarsViewModel}"
       mc:Ignorable="d"
       Title="ToBuyCarsPage" d:DesignHeight="450" d:DesignWidth="800">
     <Page.Resources>
         <DataTemplate x:Key="ListTemplate">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Image Height="100" Width="125" Source="{Binding Image}" />
                 <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                     <TextBlock Margin="5" Text="{Binding Brand}" Foreground="White" FontWeight="Bold" />
@@ -65,17 +67,23 @@
 
                     <TextBox Style="{StaticResource MaterialDesignTextBox}"  Name="SearchBox"
                              Background="Transparent"
-                             Height="30" Width="300px"
+                             Foreground="White"
+                             Text="{Binding SearchBox, Mode=TwoWay}"
+                             Height="30" Width="300"
                              HorizontalAlignment="Left" />
                 </StackPanel>
 
 
                 <ListBox Grid.Row="1" ItemsSource="{Binding CarList}"
+                         BorderBrush="Red"
+                         BorderThickness="0.5"
                          Style="{StaticResource MyListBox}"
                          ItemTemplate="{StaticResource ListTemplate}"
                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                         SelectedItem="{Binding SelectedCar}">
+                         SelectedItem="{Binding SelectedCar}"
+                         HorizontalAlignment="Stretch"
+                         HorizontalContentAlignment="Stretch">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel HorizontalAlignment="Stretch" Orientation="Vertical" />

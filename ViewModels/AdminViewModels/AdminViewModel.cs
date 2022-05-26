@@ -16,9 +16,10 @@ public class AdminViewModel : ViewModelBase
     private Page _currentPage;
     private Page _addCarPage;
     private Page _allCarsPage;
-    private Page _homePage;
+    private Page _homePageForAdmin;
     private Page _ordersPage;
     private Page _allManagersPage;
+    private Page _myAdminProfilePage;
 
     public Page CurrentPage
     {
@@ -29,25 +30,37 @@ public class AdminViewModel : ViewModelBase
     public AdminViewModel()
     {
 
-        _homePage = new HomePage();
+        _homePageForAdmin = new HomePageForAdmin();
         _addCarPage = new AddCarPage();
         _allCarsPage = new AllCarsPage();
         _ordersPage = new OrdersPage();
         _allManagersPage = new AllManagers();
+        _myAdminProfilePage = new MyAdminProfilePage();
         
-        CurrentPage = _homePage;
+        CurrentPage = _homePageForAdmin;
+        _homePageForAdmin.DataContext = new HomePageForAdminViewModel();
 
         ToHomePageCommand = new RelayCommand(OnHomePageExecute, CanHomePageCanExecuted);
         ToSellCarsButtonCommand = new RelayCommand(OnToSellCarsExecute, CanToSellCarsExecuted);
         AllCarsButtonCommand = new RelayCommand(OnAllCarsExecute, CanAllCarsExecuted);
         OrdersButtonCommand = new RelayCommand(OnOrdersExecute, CanOrdersExecuted);
         AllManagersButtonCommand = new RelayCommand(OnAllManagersExecute, CanAllManagersExecuted);
+        MyAdminProfileCommand = new RelayCommand(OnMyAdminProfileExecute, CanMyAdminProfileExecuted);
     }
 
+    public ICommand MyAdminProfileCommand { get; }
     public ICommand ToSellCarsButtonCommand { get; }
     public ICommand AllCarsButtonCommand { get; }
     public ICommand OrdersButtonCommand { get; }
     public ICommand AllManagersButtonCommand { get; }
+    
+    private bool CanMyAdminProfileExecuted(object o) => true;
+    private void OnMyAdminProfileExecute(object o)
+    {
+        _myAdminProfilePage.DataContext = new MyAdminProfileViewModel(this);
+        CurrentPage = _myAdminProfilePage;
+    }
+    
 
     private bool CanAllManagersExecuted(object o) => true;
     
@@ -89,9 +102,9 @@ public class AdminViewModel : ViewModelBase
 
     private void OnHomePageExecute(object o)
     {
-        _homePage.DataContext = new HomePageViewModel();
+        _homePageForAdmin.DataContext = new HomePageForAdminViewModel();
 
-        CurrentPage = _homePage;
+        CurrentPage = _homePageForAdmin;
     }
 
     #endregion

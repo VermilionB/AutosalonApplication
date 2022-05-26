@@ -9,13 +9,13 @@ namespace Autosalon.ViewModels;
 
 public class CustomerViewModel : ViewModelBase
 {
-    private readonly Navigator _navigator;
     private Page _currentPage;
     private Page _toSellCarsPage;
     private Page _toBuyCarsPage;
     private Page _homePage;
     private Page _myOrdersPage;
     private Page _myProfilePage;
+    private Page _aboutPage;
 
     public Page CurrentPage
     {
@@ -30,6 +30,7 @@ public class CustomerViewModel : ViewModelBase
         _homePage = new HomePage();
         _toSellCarsPage = new ToSellCarsPage();
         _toBuyCarsPage = new ToBuyCarsPage();
+        _aboutPage = new AboutPage();
         CurrentPage = _homePage;
 
         ToHomePageCommand = new RelayCommand(OnHomePageExecute, CanHomePageCanExecuted);
@@ -37,12 +38,22 @@ public class CustomerViewModel : ViewModelBase
         ToBuyCarsButtonCommand = new RelayCommand(OnToBuyCarsExecute, CanToBuyCarsExecuted);
         MyOrdersCommand = new RelayCommand(OnMyOrdersExecute, CanMyOrdersExecuted);
         MyProfilePageCommand = new RelayCommand(OnMyProfileExecute, CanMyProfileExecuted);
+        AboutCommand = new RelayCommand(OnAboutExecute, CanAboutExecuted);
     }
 
     public ICommand MyOrdersCommand { get; }
     public ICommand ToSellCarsButtonCommand { get; }
     public ICommand ToBuyCarsButtonCommand { get; }
     public ICommand MyProfilePageCommand { get; }
+    public ICommand AboutCommand { get; }
+
+    private bool CanAboutExecuted(object o) => true;
+
+    private void OnAboutExecute(object o)
+    {
+        _aboutPage.DataContext = new AboutViewModel();
+        CurrentPage = _aboutPage;
+    }
 
     private bool CanMyProfileExecuted(object o) => true;
     private void OnMyProfileExecute(object o)
@@ -87,5 +98,7 @@ public class CustomerViewModel : ViewModelBase
     }
 
     #endregion
+    
+    
     
 }

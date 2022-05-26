@@ -9,6 +9,7 @@
              d:DataContext="{d:DesignInstance Type=viewModels:RegistrationViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="600" Background="Transparent">
+    
     <Border MinWidth="500" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="25"
             CornerRadius="20"
             Background="#444447">
@@ -45,6 +46,8 @@
                     </Grid.RowDefinitions>
                     <Button Command="{Binding RegisterCommand}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"
                             Style="{StaticResource MyBtn}" Width="250px" Height="30px" FontSize="12" Content="Register" Margin="15 5 15 0" />
+                    <Button Command="{Binding ToLoginCommand}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1"
+                            Style="{StaticResource MyBtn}" Width="250px" Height="30px" FontSize="12" Content="Back to login" Margin="15 5 15 0" />
                     
                 </Grid>
                 

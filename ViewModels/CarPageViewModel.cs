@@ -71,6 +71,11 @@ public class CarPageViewModel : ViewModelBase
         SelectedAutomobile = toBuyCarsViewModel.SelectedCar;
         AddToCartCommand = new RelayCommand(OnAddToCartExecute, CanAddToCartExecuted);
     }
+    
+    public string Description
+    {
+        get => SelectedAutomobile.Description;
+    }
 
     public ICommand AddToCartCommand { get; }
 

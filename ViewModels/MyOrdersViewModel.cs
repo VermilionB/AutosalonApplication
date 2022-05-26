@@ -34,5 +34,6 @@ public class MyOrdersViewModel : ViewModelBase
         MyRequestsList =
             new ObservableCollection<Automobile>(AutosalonContext.GetContext().Automobiles
                 .Where(x => ids.Contains(x.Id)).ToList());
+                
     }
 }

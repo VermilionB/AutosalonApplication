@@ -5,20 +5,18 @@ using Autosalon.Base;
 using Autosalon.Commands;
 using Autosalon.Models;
 using Autosalon.Pages;
-using Autosalon.Resources.UserControls;
-using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Autosalon.ViewModels;
+namespace Autosalon.ViewModels.AdminViewModels;
 
-public class MyProfileViewModel : ViewModelBase
+public class MyAdminProfileViewModel : ViewModelBase
 {
-    private CustomerViewModel _customerViewModel;
-    private Customer _customer;
+    private AdminViewModel _managerViewModel;
+    private Manager _manager;
     private string _email;
-    public Customer Customer
+    public Manager Manager
     {
-        get => _customer; 
-        set => Set(ref _customer, value);
+        get => _manager; 
+        set => Set(ref _manager, value);
     }
 
     public string Email
@@ -29,18 +27,23 @@ public class MyProfileViewModel : ViewModelBase
 
     public string? Name
     {
-        get => Customer.Name;
+        get => Manager.Name;
     }
     
-    public string Surname
+    public string? Surname
     {
-        get => Customer.Surname;
+        get => Manager.Surname;
     }
-    public MyProfileViewModel(CustomerViewModel customerViewModel)
+    
+    public string? AmountOfSaledCars
     {
-        _customerViewModel = customerViewModel;
-        Customer = AutosalonContext.GetContext().Customers.FirstOrDefault(c => c.Id == CurrentUser.getInstanceCustomer().Id);
-        Email = AutosalonContext.GetContext().UserAuths.FirstOrDefault(u => u.Id == Customer.AuthId).Email;
+        get => Manager.AmountOfSaledCars.ToString();
+    }
+    public MyAdminProfileViewModel(AdminViewModel managerViewModel)
+    {
+        _managerViewModel = managerViewModel;
+        Manager = AutosalonContext.GetContext().Managers.FirstOrDefault(c => c.Id == CurrentUser.getInstanceManager().Id);
+        Email = AutosalonContext.GetContext().UserAuths.FirstOrDefault(u => u.Id == Manager.AuthId).Email;
         LogOutCommand = new RelayCommand(OnLogOutExecute, CanLogOutExecuted);
     }
     public ICommand LogOutCommand { get; }
@@ -56,7 +59,7 @@ public class MyProfileViewModel : ViewModelBase
         loginWindow.Show();
         foreach (Window item in Application.Current.Windows)
         {
-            if (item.DataContext == _customerViewModel) item.Close();
+            if (item.DataContext == _managerViewModel) item.Close();
         }   
         
     }

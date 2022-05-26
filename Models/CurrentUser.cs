@@ -55,4 +55,10 @@ public static class CurrentUser
             }
         }
     }
+    
+    public static void ClearInstance()
+    {
+        instance = null;
+        instance2 = null;
+    }
 }

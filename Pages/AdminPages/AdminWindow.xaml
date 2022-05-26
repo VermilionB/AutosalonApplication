@@ -59,7 +59,8 @@
                     Command="{Binding OrdersButtonCommand}">Orders</Button>
             <Button Grid.Row="0" Grid.Column="4" Style="{StaticResource MyBtn}"
                     Command="{Binding AllManagersButtonCommand}">Managers</Button>
-            <Button Grid.Row="0" Grid.Column="5" Style="{StaticResource MyBtn}">My Profile</Button>
+            <Button Grid.Row="0" Grid.Column="5" Style="{StaticResource MyBtn}"
+                    Command="{Binding MyAdminProfileCommand}">My Profile</Button>
         </Grid>
 
         <Frame Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch"

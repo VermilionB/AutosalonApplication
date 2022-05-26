@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 using Autosalon.Base;
 using Autosalon.Commands;
 using Autosalon.Models;
@@ -22,6 +23,8 @@ public class CarPageForAdminViewModel : ViewModelBase
         SelectedAutomobile.Approved = "Approved";
         using (var db = new AutosalonContext())
         {
+            CurrentUser.getInstanceManager().AmountOfSaledCars++;
+            db.Managers.FirstOrDefault(m => m.Id == CurrentUser.getInstanceManager().Id).AmountOfSaledCars++;
             db.Automobiles.Update(SelectedAutomobile);
             db.SaveChanges();
         }
@@ -79,6 +82,11 @@ public class CarPageForAdminViewModel : ViewModelBase
     public string Approved
     {
         get => SelectedAutomobile.Approved;
+    }
+    
+    public string Description
+    {
+        get => SelectedAutomobile.Description;
     }
     public Automobile SelectedAutomobile
     {
